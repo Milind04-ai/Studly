@@ -15,5 +15,42 @@ Studly is a micro-learning platform where learners can watch short educational v
 2. Copy `backend/.env.example` to `backend/.env` and change the password values.
 3. From the repository root, start MySQL:
 
-   ```bash
-   docker compose --env-file backend/.env up -d mysql
+```bash
+docker compose --env-file backend/.env up -d mysql
+```
+
+4. Check that MySQL is running:
+
+```bash
+docker compose ps
+```
+
+The `studly-mysql` container should be running and healthy.
+
+5. Start the Spring Boot backend:
+
+```bash
+cd backend
+mvn spring-boot:run
+```
+
+The backend runs on:
+
+```text
+http://localhost:8080/api/v1
+```
+
+6. Test the health endpoint:
+
+```powershell
+Invoke-RestMethod http://localhost:8080/api/v1/health
+```
+
+Expected response:
+
+```text
+service    timestamp                    status
+-------    ---------                    ------
+studly-api <timestamp>                  ok
+
+```
